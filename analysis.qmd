@@ -3,3 +3,36 @@ title: "analysis"
 format: html
 ---
 
+```{r}
+library(palmerpenguins)
+```
+
+```{r}
+summary(penguins)
+```
+
+```{r}
+library(dplyr)
+
+penguins %>%
+  group_by(species) %>%
+  summarise(
+    count = n(),
+    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),
+    mean_mass = mean(body_mass_g, na.rm = TRUE),
+    mean_bill_length = mean(bill_length_mm, na.rm = TRUE)
+  )
+```
+
+```{r}
+library(ggplot2)
+
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(
+    title = "Flipper Length vs Body Mass",
+    x = "Flipper Length (mm)",
+    y = "Body Mass (g)"
+  ) +
+  theme_minimal()
+```
